@@ -88,12 +88,20 @@ class BaselineNLPFlow(FlowSpec):
         # TODO: compute the false positive predictions where the baseline is 1 and the valdf label is 0.
         # TODO: display the false_positives dataframe using metaflow.cards
         # Documentation: https://docs.metaflow.org/api/cards#table
-        current.card.append(Table.from_dataframe(self.valdf.query(f"(label == 0) & ({self.base_predict_val} == 1)", engine="python")))
+        current.card.append(Table.from_dataframe((self.valdf
+                                                      .query(f"(label == 0) & ({self.base_predict_val} == 1)",
+                                                             engine="python")
+                                                      .head(10)),
+                                                 truncate=False))
 
         current.card.append(Markdown("## Examples of False Negatives"))
         # TODO: compute the false positive predictions where the baseline is 0 and the valdf label is 1.
         # TODO: display the false_negatives dataframe using metaflow.cards
-        current.card.append(Table.from_dataframe(self.valdf.query(f"(label == 1)  & ({self.base_predict_val} == 0)", engine="python")))
+        current.card.append(Table.from_dataframe((self.valdf
+                                                      .query(f"(label == 1)  & ({self.base_predict_val} == 0)",
+                                                             engine="python")
+                                                      .head(10)),
+                                                 truncate=False))
 
 
 if __name__ == "__main__":
