@@ -6,7 +6,7 @@ class RF_Flow(FlowSpec):
     train a random forest
     """
 
-    @card
+    @card(type='corise')
     @step
     def start(self):
         """
